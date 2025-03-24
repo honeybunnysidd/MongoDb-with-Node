@@ -69,13 +69,22 @@ app.get("/chats/:id/edit", async (req, res) => {
   res.render("edit", { chat });
 });
 
-app.patch("/chats/:id", (req, res) => {
+app.patch("/chats/:id", async (req, res) => {
   let { id } = req.params;
   let { msg } = req.body;
 
-  Chat.findByIdAndUpdate(`${id}`, { msg: msg })
+  await Chat.findByIdAndUpdate(`${id}`, { msg: msg }, { runValidators: true })
     .then(() => res.redirect("/chats"))
     .catch((err) => console.log(err));
+});
+
+//Destroy Route
+app.delete("/chats/:id", async (req, res) => {
+  let { id } = req.params;
+
+  let deleteChat = await Chat.findByIdAndDelete(`${id}`);
+
+  res.redirect("/chats");
 });
 
 app.listen(8080, () => {

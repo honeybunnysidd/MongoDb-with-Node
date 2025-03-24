@@ -51,6 +51,14 @@
           Time: <%= chat.createdAt.toLocaleTimeString("en-US", { hour:
           "2-digit", minute: "2-digit", hour12: true }) %>
         </p>
+
+        <form
+            method="post"
+            action="/chats/<%= chat._id %>?_method=DELETE"
+            class="position-absolute bottom-0 end-0 m-2 mb-3"
+          >
+            <button class="btn btn-danger">Delete</button>
+          </form>
       </div>
     </div>
 
