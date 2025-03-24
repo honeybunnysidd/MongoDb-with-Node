@@ -15,19 +15,19 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
-    <link rel="stylesheet" href="/style.css" />
-
   </head>
   <body>
-    <form action="/chats/new" method="post" class="container mt-5">
+    <h3 class="container mt-5">Edit your Message: <%= chat._id %></h3>
+    <form method="post" action="/chats/<%= chat._id %>?_method=PATCH" class="container mt-5">
       <div class="mb-3">
         <label for="sender" class="form-label">Sender</label>
         <input
           type="text"
           name="sender"
           class="form-control"
-          required
+          readonly
           id="sender"
+          placeholder="@<%= chat.sender %>"
         />
       </div>
 
@@ -37,21 +37,21 @@
           type="text"
           name="reciever"
           class="form-control"
-          required
+          readonly
           id="reciever"
+          placeholder="@<%= chat.reciever %>"
         />
       </div>
       <div class="mb-3">
-        <label for="msg" class="form-label">Message</label>
-        <input
-          type="text"
+        <label for="msg" class="form-label">Edit your Message*</label>
+        <textarea
           class="form-control"
           id="msg"
           name="msg"
-          placeholder="Type your message"
-        />
+        /><%= chat.msg %></textarea>
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <a href="http://localhost:8080/chats" class="btn btn-danger">Back</a>
+      <button type="submit" class="btn btn-success">Update</button>
     </form>
   </body>
 </html>

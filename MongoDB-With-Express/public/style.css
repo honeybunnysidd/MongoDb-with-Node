@@ -1,8 +1,6 @@
 .card {
   background-color: aliceblue;
 }
-.msg{
-    background-color: dodgerblue;
-    border-radius: 8px;
-    padding: 3px 12px;
+.msg {
+  background-color: rgb(5, 136, 136) !important;
 }

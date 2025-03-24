@@ -6,6 +6,10 @@ const mongosse = require("mongoose");
 const { Chat } = require("./models/chat");
 const { send } = require("process");
 
+const methodOverride = require("method-override");
+
+app.use(methodOverride("_method"));
+
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
@@ -43,9 +47,9 @@ app.get("/chats/new", (req, res) => {
   res.render("newChat");
 });
 
-app.post("/chats/new", async (req, res) => {
+app.post("/chats/new", (req, res) => {
   let { sender, reciever, msg } = req.body;
-  await Chat.insertOne({
+  Chat.insertOne({
     sender: sender,
     reciever: reciever,
     msg: msg,
@@ -54,6 +58,23 @@ app.post("/chats/new", async (req, res) => {
     .then((data) => {
       res.redirect("/chats");
     })
+    .catch((err) => console.log(err));
+});
+
+//Edit & Update Route
+app.get("/chats/:id/edit", async (req, res) => {
+  let { id } = req.params;
+  let chat = await Chat.findById(`${id}`);
+
+  res.render("edit", { chat });
+});
+
+app.patch("/chats/:id", (req, res) => {
+  let { id } = req.params;
+  let { msg } = req.body;
+
+  Chat.findByIdAndUpdate(`${id}`, { msg: msg })
+    .then(() => res.redirect("/chats"))
     .catch((err) => console.log(err));
 });
 
