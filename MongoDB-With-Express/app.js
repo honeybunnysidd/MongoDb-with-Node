@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const path = require("path");
-const mongosse = require("mongoose");
+const mongoose = require("mongoose");
 
 const { Chat } = require("./models/chat");
 const { send } = require("process");
@@ -27,7 +27,7 @@ main()
   .catch((err) => console.log(err));
 
 async function main() {
-  await mongosse.connect("mongodb://127.0.0.1:27017/whatsapp");
+  await mongoose.connect("mongodb://127.0.0.1:27017/whatsapp");
 }
 
 // Redirect home route to all chats
