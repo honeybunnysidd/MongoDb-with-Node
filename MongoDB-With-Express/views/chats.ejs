@@ -17,9 +17,14 @@
     ></script>
     <link rel="stylesheet" href="/style.css" />
   </head>
-  <body>
+  <body class="m-5">
     <h1 class="m-3">All chats</h1>
-
+    <a
+    href="http://localhost:8080/chats/new"
+    class="btn btn-success m-3"
+  >
+    See details
+  </a>
     <% for(chat of chats){ %>
 
     <div class="card mb-3 m-3" style="width: 18rem">
@@ -34,12 +39,7 @@
           <form method="post" action="/posts/<%= %>?_method=DELETE">
             <button class="btn btn-danger">Delete</button>
           </form>
-          <a
-            href="http://localhost:3000/posts/<%= %>"
-            class="btn btn-success"
-          >
-            See details
-          </a>
+          
         </div> -->
       </div>
     </div>
