@@ -1,20 +1,21 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-main().then(() => {
+main()
+  .then(() => {
     console.log("DB connected Successfully");
-}).catch(err => console.log(err));
+  })
+  .catch((err) => console.log(err));
 
 //Make connection
 async function main() {
-    await mongoose.connect('mongodb://127.0.0.1:27017/college');
-
+  await mongoose.connect("mongodb://127.0.0.1:27017/college");
 }
 
 //Defining our rules/constraint for Schema
 const studentSchema = new mongoose.Schema({
-    name: String,
-    email: String,
-    age: Number,
+  name: String,
+  email: String,
+  age: Number,
 });
 
 //Model class for creating collection
@@ -148,6 +149,5 @@ Student.findByIdAndDelete("67dd92325874428c60993705").then((data) => {
 
 //------------------------Model.findOneAndDelete()
 Student.findOneAndDelete({ email: "sidd123@gmail.com" }).then((data) => {
-    console.log(data);
-})
-
+  console.log(data);
+});
